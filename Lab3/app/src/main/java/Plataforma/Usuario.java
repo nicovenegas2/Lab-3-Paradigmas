@@ -1,6 +1,7 @@
-package Editor;
+package Plataforma;
 
 import Plataforma.Documento;
+import java.util.LinkedList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,7 +19,7 @@ public class Usuario {
     private int id;
     private String name;
     private String password;
-    private Documento[] documentos;
+    private LinkedList<Documento> respuestas = new LinkedList<Documento>();
 
     public Usuario(String name, String pass) {
         this.id = Usuario.usuariosExistentes;
