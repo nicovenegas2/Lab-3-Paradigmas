@@ -53,14 +53,6 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public Documento[] getDocumentos() {
-        return documentos;
-    }
-
-    public void setDocumentos(Documento[] documentos) {
-        this.documentos = documentos;
-    }
     
     // metodo que comprueba si una contraseña y nombre coincide con el usuario
     public Boolean canLogin(String name, String pass){
