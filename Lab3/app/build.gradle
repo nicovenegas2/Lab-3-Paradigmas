@@ -6,11 +6,14 @@
  * User Manual available at https://docs.gradle.org/7.3/userguide/building_java_projects.html
  */
 
+
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
 }
-
+run {
+    standardInput = System.in
+}
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -33,3 +36,5 @@ tasks.named('test') {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+

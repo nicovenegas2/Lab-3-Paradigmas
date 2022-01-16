@@ -1,6 +1,6 @@
-package Plataforma;
+package Lab3;
 
-import Plataforma.Documento;
+import Lab3.Documento;
 import java.util.LinkedList;
 
 /*

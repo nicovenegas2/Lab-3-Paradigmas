@@ -1,4 +1,4 @@
-package Plataforma;
+package Lab3;
 
 import java.util.Date;
 import java.util.LinkedList;
