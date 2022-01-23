@@ -56,6 +56,35 @@ public class Paradigmadocs {
         this.activo = activo;
     }
     
+    public Boolean isLogin(){
+        return this.activo != null;
+    }
+    
+    public void logOut(){
+        this.setActivo(null);
+    }
+    public boolean register(String user, String pass){
+        for(Usuario usuario: this.usuarios){
+            if (usuario.getName().equals(user))
+                return false;
+        }
+        Usuario newUser;
+        newUser = new Usuario(user, pass);
+        this.usuarios.add(newUser);
+        return true;
+    }
+    
+    public boolean login(String user, String pass){
+        for(Usuario usuario: this.usuarios){
+            if (usuario.canLogin(user, pass)){
+                this.setActivo(usuario);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    
     
     
 }

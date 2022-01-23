@@ -53,8 +53,9 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    // metodo que comprueba si una contraseña y nombre coincide con el usuario
+    /**
+    * metodo que comprueba si una contraseña y nombre coincide con el usuario
+    */
     public Boolean canLogin(String name, String pass){
         if (this.name.equals(name) && this.password.equals(pass)) {return true;}
         return false;
