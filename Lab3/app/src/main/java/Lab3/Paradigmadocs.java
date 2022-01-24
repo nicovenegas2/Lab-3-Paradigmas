@@ -84,7 +84,80 @@ public class Paradigmadocs {
         return false;
     }
     
+    public boolean create(String nombre, String contenido){
+        int i = 0;
+        Documento doc;
+        if (!this.isLogin()) return false;
+        while(i < this.usuarios.size()){
+            if (this.usuarios.get(i).getName().equals(this.activo.getName())){
+                doc = new Documento(nombre, contenido);
+                this.usuarios.get(i).addDocument(doc);
+                this.setActivo(this.usuarios.get(i));
+                return true;
+            }
+            i++;
+        }
+        
+        return false;
+    }
+    
+    public void showDocuments(){
+        for(Usuario usuario: this.usuarios){
+            System.out.println(usuario.getName());
+            for(Documento doc: usuario.getDocs()){
+                System.out.println(doc.getAccesos());
+            }
+        }
+    }
+    
+    public boolean existUser(String user){
+        for(Usuario usuario: this.usuarios){
+            if (usuario.getName().equals(user))
+                return true;
+        }
+        return false;
+    }
+    
+    public boolean share(Acceso acc, int idDoc){
+        int i = 0;
+        int posUs, posDoc;
+        if (!this.isLogin()) return false;
+        posUs = this.getUserPos();
+        posDoc = this.getDocumentPosByid(idDoc);
+        if (this.usuarios.get(posUs).getDocs().get(posDoc).SetAcceso(acc))
+            return true;
+        
+        return false;
+    }
+    
+    public int getUserPos(){
+        int i=0;
+        if (!this.isLogin()) return -1;
+        while(i < this.usuarios.size()){
+            if(this.usuarios.get(i).getName().equals(this.activo.getName()))
+                return i;
+        }
+        return -1;
+    }
+    
+    public int getDocumentPosByid(int id){
+        int posU = this.getUserPos();
+        if (posU != -1){
+            for(int i=0; i<this.usuarios.get(posU).getDocs().size(); i++){
+                if(this.usuarios.get(posU).getDocs().get(i).getId() == id) return i;
+            }
+        }
+        return -1;
+    }
     
     
+    public void printDocsUserAndId(){
+        int i = this.getUserPos();
+        if (i != -1){
+            for(Documento doc: this.usuarios.get(i).getDocs()){
+                System.out.println(doc.getId() + " --> " + doc.getNombre());
+            }
+        }
+    }
     
 }

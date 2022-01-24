@@ -13,10 +13,11 @@ import java.util.LinkedList;
  */
 class Acceso {
     private String nombre;
-    LinkedList<String> accesos = new LinkedList<String>();
+    char tipo;
 
-    public Acceso(String nombre) {
+    public Acceso(String nombre, char type) {
         this.nombre = nombre;
+        this.tipo = type;
     }
 
     public String getNombre() {
@@ -27,12 +28,13 @@ class Acceso {
         this.nombre = nombre;
     }
 
-    public LinkedList<String> getAccesos() {
-        return accesos;
+    public char getTipo() {
+        return tipo;
     }
 
-    public void setAccesos(LinkedList<String> accesos) {
-        this.accesos = accesos;
+    public void setTipo(char tipo) {
+        this.tipo = tipo;
     }
+
     
 }

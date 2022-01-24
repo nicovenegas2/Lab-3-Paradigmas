@@ -19,7 +19,7 @@ public class Usuario {
     private int id;
     private String name;
     private String password;
-    private LinkedList<Documento> respuestas = new LinkedList<Documento>();
+    private LinkedList<Documento> docs = new LinkedList<Documento>();
 
     public Usuario(String name, String pass) {
         this.id = Usuario.usuariosExistentes;
@@ -53,12 +53,28 @@ public class Usuario {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public LinkedList<Documento> getDocs() {
+        return docs;
+    }
+
+    public void setDocs(LinkedList<Documento> docs) {
+        this.docs = docs;
+    }
+    
+     
+   
+    
     /**
     * metodo que comprueba si una contraseña y nombre coincide con el usuario
     */
     public Boolean canLogin(String name, String pass){
         if (this.name.equals(name) && this.password.equals(pass)) {return true;}
         return false;
+    }
+    
+    public void addDocument(Documento document){
+        this.docs.add(document);
     }
     
     

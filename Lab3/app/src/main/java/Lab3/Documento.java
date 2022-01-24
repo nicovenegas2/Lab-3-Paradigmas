@@ -17,15 +17,19 @@ public class Documento {
     static int documentosTotales = 0;
     private int id;
     private String nombre;
+    private String autor;
+    private String cont;
     private Date fechaCreacion;
     private Date fechaModificacion;
     private LinkedList<Version> versiones = new LinkedList<Version>();
     private LinkedList<Acceso> accesos = new LinkedList<Acceso>();
 
-    public Documento(String name, Date creacion) {
+    public Documento(String name, String contenido) {
         this.id = Documento.documentosTotales;
+        this.nombre = name;
         Documento.documentosTotales++;
-        this.fechaCreacion = creacion;
+        this.cont = contenido;
+        this.fechaCreacion = new Date();
     }
 
     public int getId() {
@@ -77,7 +81,50 @@ public class Documento {
     }
     
     
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getCont() {
+        return cont;
+    }
+
+    public void setCont(String cont) {
+        this.cont = cont;
+    }
     
     
+    public int existAcceso(Acceso acc){
+        int i=0;
+        while (i < this.getAccesos().size()){
+            if(this.getAccesos().get(i).getNombre().equals(acc.getNombre()))
+                return i;
+            i++;
+        }
+        
+        return -1;
+    }
+    
+    
+    public boolean SetAcceso(Acceso acc){
+        try{
+            int i = this.existAcceso(acc);
+            if (i != -1){
+                this.getAccesos().set(i, acc);
+                return true;
+            } else {
+                this.getAccesos().add(acc);
+                return true;
+            }
+            
+        } catch(Error e){
+            return false;
+        }
+        
+    }
     
 }

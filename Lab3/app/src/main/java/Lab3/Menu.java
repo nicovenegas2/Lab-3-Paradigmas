@@ -62,11 +62,15 @@ public class Menu {
         
        if(para.isLogin()){
            if(opcion.equals("1"))
-               System.out.println("algo");
+               this.create();
+           else if(opcion.equals("2"))
+               this.share();
            else if(opcion.equals("8"))
                this.logOut();
            else if(opcion.equals("9"))
                this.stop();
+           else if(opcion.equals("99"))
+               this.para.showDocuments();
        }else {
            if(opcion.equals("1"))
                this.register();
@@ -91,7 +95,7 @@ public class Menu {
     }
     
     public void stop(){
-        this.runO = false;
+        this.runO = false;  
     }
     
     
@@ -129,4 +133,52 @@ public class Menu {
         this.para.logOut();
         
     }
+    
+    private void create(){
+        Date fecha;
+        String nombre, contenido;
+        System.out.println("HA ELEGIDO CREAR UN DOCUMENTO");
+        System.out.println("por favor elija el nombre del documento: ");
+        nombre = this.input.nextLine();
+        System.out.println("indique el contenido inicial: ");
+        contenido = this.input.nextLine();
+        if (this.para.create(nombre, contenido)){
+            System.out.println("documento creado con exito");
+        }else {
+            System.out.println("hubo algun error por favor intentelo de nuevo");
+        }
+    }
+    
+     private void share(){
+        int idDoc;
+        boolean stop = false;
+        String user, opcion;
+        char tipo;
+        System.out.println("HA ELEGIDO COMPARTIR DOCUMENTOS");
+        System.out.println("elija el documento que va a compartir");
+        this.para.printDocsUserAndId();
+        System.out.println("eleccion: ");
+        try{
+            idDoc = this.input.nextInt();
+            this.input.nextLine();
+        } catch(Error e){
+            System.out.println("Opcion invalida");
+            return;
+        }
+        while(!stop){
+            System.out.println("a que usuario quiere compartir el documento?: ");
+            user = this.input.nextLine();
+            if (this.para.existUser(user)){
+                System.out.println("con que permiso va a compartir el documento?: ");
+                System.out.println("1. \"R\" solo permite leer el documento.");
+                System.out.println("1. \"C\" Permiso \"R\" + permite comentar el documento.");
+                System.out.println("1. \"R\" Permiso \"W\" + permite escribir el documento.");
+                opcion = this.input.nextLine();
+            }
+            
+            
+        }
+     }
+    
+    
 }
