@@ -16,9 +16,9 @@ class Version {
     private Date fecha;
     private String contenido;
 
-    public Version(int id, Date fecha, String contenido) {
+    public Version(int id, String contenido) {
         this.id = id;
-        this.fecha = fecha;
+        this.fecha = new Date();
         this.contenido = contenido;
     }
 

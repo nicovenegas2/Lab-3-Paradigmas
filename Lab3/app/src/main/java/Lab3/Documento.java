@@ -24,9 +24,10 @@ public class Documento {
     private LinkedList<Version> versiones = new LinkedList<Version>();
     private LinkedList<Acceso> accesos = new LinkedList<Acceso>();
 
-    public Documento(String name, String contenido) {
+    public Documento(String name, String contenido, String autor) {
         this.id = Documento.documentosTotales;
         this.nombre = name;
+        this.autor = autor;
         Documento.documentosTotales++;
         this.cont = contenido;
         this.fechaCreacion = new Date();
@@ -127,4 +128,37 @@ public class Documento {
         
     }
     
+    public void addVersion(Version ver){
+        this.getVersiones().add(ver);
+    }
+    
+    
+    public void addContent(String cont){
+        Version newVer = new Version(this.getVersiones().size(), this.getCont());
+        this.addVersion(newVer);
+        this.setCont(this.getCont() + cont);
+        
+    }
+    
+    public boolean canEdit(String user){
+        for(Acceso acc: this.getAccesos()){
+            if(acc.getNombre().equals(user) && acc.getTipo() == 'W') return true;
+        }
+        if (this.getAutor().equals(user)) return true;
+        return false;
+    }
+    
+    public void showVersions(){
+        for (Version ver: this.versiones){
+            System.out.println(ver.getId() + " --> " + ver.getFecha() + " Contenido: " + ver.getContenido());
+        }
+    }
+    
+    public void info(){
+        System.out.println("Id Documento: " + this.getId());
+        System.out.println("Nombre Documento: " + this.getNombre());
+        System.out.println("Autor: " + this.getAutor());
+        System.out.println("Contenido: " + this.getCont());
+
+    }
 }

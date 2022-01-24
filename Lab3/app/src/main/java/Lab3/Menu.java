@@ -30,6 +30,7 @@ public class Menu {
         nombre = this.input.nextLine();
         this.para = new Paradigmadocs(nombre, fecha);
         this.runO = true;
+        this.datosPrevios();
         this.run();
 
     }
@@ -65,6 +66,10 @@ public class Menu {
                this.create();
            else if(opcion.equals("2"))
                this.share();
+           else if(opcion.equals("3"))
+               this.add();
+           else if(opcion.equals("4"))
+               this.rollback();
            else if(opcion.equals("8"))
                this.logOut();
            else if(opcion.equals("9"))
@@ -97,6 +102,17 @@ public class Menu {
     public void stop(){
         this.runO = false;  
     }
+    
+    public void datosPrevios(){
+        this.para.register("nico", "1234");
+        this.para.register("ale", "1234");
+        this.para.register("loki", "4321");
+        this.para.register("cody", "12345");
+        
+    }
+    
+    
+    
     
     
     
@@ -153,6 +169,7 @@ public class Menu {
         int idDoc;
         boolean stop = false;
         String user, opcion;
+        Acceso acc;
         char tipo;
         System.out.println("HA ELEGIDO COMPARTIR DOCUMENTOS");
         System.out.println("elija el documento que va a compartir");
@@ -171,14 +188,79 @@ public class Menu {
             if (this.para.existUser(user)){
                 System.out.println("con que permiso va a compartir el documento?: ");
                 System.out.println("1. \"R\" solo permite leer el documento.");
-                System.out.println("1. \"C\" Permiso \"R\" + permite comentar el documento.");
-                System.out.println("1. \"R\" Permiso \"W\" + permite escribir el documento.");
+                System.out.println("2. \"C\" Permiso \"R\" + permite comentar el documento.");
+                System.out.println("3. \"R\" Permiso \"W\" + permite escribir el documento.");
                 opcion = this.input.nextLine();
+                if (opcion.equals("1"))
+                    tipo = 'R';
+                else if (opcion.equals("2"))
+                    tipo = 'C';
+                else if (opcion.equals("3"))
+                    tipo = 'W';
+                else
+                    tipo = 'O';
+                if(tipo != 'O'){
+                    acc = new Acceso(user,tipo);
+                    this.para.share(acc, idDoc);
+                }
+                else
+                    System.out.println("opcion invalida");
+                
+                    
+            }else {
+                System.out.println("el usuario no existe");
             }
-            
-            
+            System.out.println("desea repetir el proceso?: ");
+            System.out.println("1. si    2. no");
+            opcion = this.input.nextLine();
+            if (opcion.equals("2")) stop = true;
+
         }
      }
+     
+     public void add(){
+        int idDoc;
+        String cont, opcion;
+        System.out.println("HA ELEGIDO AGREGAR CONTENIDO A UN DOCUMENTO");
+        System.out.println("elija el documento que va a compartir");
+        this.para.printDocsUserAndId();
+        System.out.println("eleccion: ");
+        try{
+            idDoc = this.input.nextInt();
+            this.input.nextLine();
+        } catch(Error e){
+            System.out.println("Opcion invalida");
+            return;
+        }
+        this.para.getDocumentById(idDoc).info();
+        System.out.println("Que desea agregar?: ");
+        cont = this.input.nextLine();
+        if (this.para.add(idDoc, cont)){
+            System.out.println("Contenido añadido con exito");
+        }
+        else{
+            System.out.println("ha ocurrido algun error, intentelo de nuevo");
+        }
+     }
+     
+     
+      public void rollback(){
+        int idDoc;
+        System.out.println("HA ELEGIDO HACER UN ROLLBACK A TU DOCUMENTO");
+        System.out.println("elija el documento: ");
+        this.para.printDocsUserAndIdAutor();
+        System.out.println("eleccion: ");
+        try{
+            idDoc = this.input.nextInt();
+            this.input.nextLine();
+        } catch(Error e){
+            System.out.println("Opcion invalida");
+            return;
+        }
+        this.para.getDocumentById(idDoc).showVersions();
+        System.out.println("que version quieres restaurar?");
+        
+        }
     
     
 }
