@@ -46,9 +46,8 @@ public class Menu {
             System.out.println("4. Restaurar versión de un documento");
             System.out.println("5. Revocar acceso a un documento");
             System.out.println("6. Buscar en los documentos");
-            System.out.println("7. Visualizar documentos");
-            System.out.println("8. Cerrar sesión");
-            System.out.println("9. Cerrar el programa");
+            System.out.println("7. Cerrar sesión");
+            System.out.println("8. Cerrar el programa");
         }
         else {
             System.out.println("USUARIO NO REGISTRADO");
@@ -75,9 +74,9 @@ public class Menu {
                this.revokeAllAccess();
            else if(opcion.equals("6"))
                this.search();
-           else if(opcion.equals("8"))
+           else if(opcion.equals("7"))
                this.logOut();
-           else if(opcion.equals("9"))
+           else if(opcion.equals("8"))
                this.stop();
            else if(opcion.equals("99"))
                this.para.showDocuments();
@@ -124,8 +123,21 @@ public class Menu {
         this.para.logOut();
         
         this.para.register("ale", "1234");
+        this.para.login("ale", "1234");
+        this.para.create("doc 5", "contenido 5");
+        this.para.create("doc 6", "contenido 6");
+        this.para.logOut();
         this.para.register("loki", "4321");
+        this.para.login("loki", "4321");
+        this.para.create("doc 7", "contenido 7");
+        this.para.create("doc 8", "contenido 8");
+        this.para.logOut();
+        
         this.para.register("cody", "1234");
+         this.para.login("cody", "1234");
+        this.para.create("doc 9", "contenido 9");
+        this.para.create("doc 10", "contenido 10");
+        this.para.logOut();
         this.para.register("tom", "mot");
         
     }
