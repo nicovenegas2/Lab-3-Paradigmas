@@ -1,0 +1,48 @@
+﻿Requerimientos Funcionales
+	Evaluación
+	 Clases y estructuras que forman el programa :         
+	1
+	 Menú interactivo por terminal:
+	1
+	 Autenticación: 
+	1
+	 Create:    
+	1
+	 Share:
+	1
+	 Add:
+	1
+	 RollBack: 
+	1
+	 RevokeAccesses:
+	1
+	Search:
+	1
+	Visualize:
+	0
+	
+
+Requerimientos No Funcionales
+	Evaluación
+	Autoevaluación
+	1
+	Lenguaje y Herramientas de trabajo
+	1
+	Interacción con el programa
+	1
+	Uso del paradigma
+	1
+	No variables
+	1
+	Prerrequisitos
+	1
+	Documentación
+	0.2
+	Organización del código
+	1
+	Diagrama de análisis
+	1
+	Diagrama de diseño
+	1
+	Uso de git
+	1
