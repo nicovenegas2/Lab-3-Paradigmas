@@ -154,6 +154,34 @@ public class Documento {
         }
     }
     
+    public Version getVersionById(int idVersion){
+        
+        for(int i=0; i < this.versiones.size(); i++){
+            if(this.versiones.get(i).getId() == idVersion) return this.versiones.get(i);
+        }
+        
+        return null;
+    }
+    public boolean revokeAccess(String user){
+        if(!user.equals(this.getAutor())) return false;
+        this.getAccesos().clear();
+        return true;
+        
+    }
+    
+    
+    public boolean isInvolucrated(String user){
+        if(this.getAutor().equals(user)) return true;
+        
+        for(Acceso acc: this.getAccesos()){
+            if(acc.getNombre().equals(user) && acc.getTipo() == 'W') return true;
+            else if(acc.getNombre().equals(user) && acc.getTipo() == 'R') return true;
+            else if(acc.getNombre().equals(user) && acc.getTipo() == 'C') return true;
+        }
+        
+        return false;
+    }
+    
     public void info(){
         System.out.println("Id Documento: " + this.getId());
         System.out.println("Nombre Documento: " + this.getNombre());

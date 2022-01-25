@@ -162,4 +162,42 @@ public class Paradigmadocs {
         }
     }
     
+    public void rollback(int idDoc, int idVersion){
+        Documento doc = this.getDocumentById(idDoc);
+        Version newVer;
+        Version ver = doc.getVersionById(idVersion);
+        newVer = new Version(doc.getVersiones().size(), doc.getCont());
+        doc.setCont(ver.getContenido());
+        
+    }
+    
+    public boolean revokeAccess(int idDoc){
+        if(!this.isLogin()) return false;
+        Documento doc = this.getDocumentById(idDoc);
+        doc.revokeAccess(this.activo.getName());
+        return true;
+    }
+    
+    public void printInvolucratedDocs(){
+        for(Usuario user: this.usuarios){
+            for (Documento doc: user.getDocs()){
+                if(doc.isInvolucrated(this.getActivo().getName())){
+                    System.out.println(doc.getId() + " --> " + doc.getNombre());
+                }
+            }
+        }
+    }
+    
+    public LinkedList search(String searchCont){
+        LinkedList<Documento> docs = new LinkedList<Documento>();
+        if (!this.isLogin()) return docs;
+        for(Usuario user: this.usuarios){
+            for (Documento doc: user.getDocs()){
+                if(doc.getCont().contains(searchCont) && doc.isInvolucrated(this.activo.getName())){
+                    docs.add(doc);
+                }
+            }
+        }
+        return docs;
+    }
 }

@@ -70,6 +70,8 @@ public class Menu {
                this.add();
            else if(opcion.equals("4"))
                this.rollback();
+           else if(opcion.equals("5"))
+               this.revokeAllAccess();
            else if(opcion.equals("8"))
                this.logOut();
            else if(opcion.equals("9"))
@@ -245,7 +247,7 @@ public class Menu {
      
      
       public void rollback(){
-        int idDoc;
+        int idDoc, idVer;
         System.out.println("HA ELEGIDO HACER UN ROLLBACK A TU DOCUMENTO");
         System.out.println("elija el documento: ");
         this.para.printDocsUserAndIdAutor();
@@ -259,8 +261,36 @@ public class Menu {
         }
         this.para.getDocumentById(idDoc).showVersions();
         System.out.println("que version quieres restaurar?");
-        
+        System.out.println("eleccion: ");
+        try{
+            idVer = this.input.nextInt();
+            this.input.nextLine();
+        } catch(Error e){
+            System.out.println("Opcion invalida");
+            return;
         }
+        this.para.rollback(idDoc, idVer);
+        
+    }
     
-    
+    public void revokeAllAccess(){
+        int idDoc, idVer;
+           System.out.println("HA ELEGIDO BORRAR LOS ACCESSOS DE UN DOCUMENTO");
+           System.out.println("elija el documento: ");
+           this.para.printDocsUserAndIdAutor();
+           System.out.println("eleccion: ");
+           try{
+               idDoc = this.input.nextInt();
+               this.input.nextLine();
+           } catch(Error e){
+               System.out.println("Opcion invalida");
+               return;
+           }
+           
+           if (this.para.revokeAccess(idDoc)){
+               System.out.println("Accessos eliminados con exito");
+           } else{
+               System.out.println("Ha ocurrido algun error, intentelo de nuevo");
+           }
+    }
 }
