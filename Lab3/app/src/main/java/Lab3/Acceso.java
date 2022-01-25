@@ -8,7 +8,8 @@ package Lab3;
 import java.util.LinkedList;
 
 /**
- *
+ * Clase que representa un acceso
+ * Contiene un nombre y un caracter que representa el tipo de acceso
  * @author nicov
  */
 class Acceso {

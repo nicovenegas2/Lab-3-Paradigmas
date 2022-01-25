@@ -10,7 +10,9 @@ import java.util.LinkedList;
  */
 
 /**
- *
+ * Clase que representa a un usuario
+ * tiene un id unico, la cantidad total de usuarios creados, nombre, contrasegna y una lista de documentos
+ * 
  * @author nicov
  */
 public class Usuario {

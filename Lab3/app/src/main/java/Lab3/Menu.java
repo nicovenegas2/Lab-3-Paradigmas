@@ -1,6 +1,7 @@
 package Lab3;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /*
@@ -10,7 +11,7 @@ import java.util.Scanner;
  */
 
 /**
- *
+ * clase que hace referencia a un menu interactivo
  * @author nicov
  */
 public class Menu {
@@ -72,12 +73,17 @@ public class Menu {
                this.rollback();
            else if(opcion.equals("5"))
                this.revokeAllAccess();
+           else if(opcion.equals("6"))
+               this.search();
            else if(opcion.equals("8"))
                this.logOut();
            else if(opcion.equals("9"))
                this.stop();
            else if(opcion.equals("99"))
                this.para.showDocuments();
+           else{
+               System.out.println("opcion invalida");
+           }
        }else {
            if(opcion.equals("1"))
                this.register();
@@ -85,6 +91,9 @@ public class Menu {
                this.login();
            else if(opcion.equals("3"))
                this.stop();
+           else {
+               System.out.println("opcion invalida");
+           }
        }
         
     }
@@ -107,9 +116,17 @@ public class Menu {
     
     public void datosPrevios(){
         this.para.register("nico", "1234");
+        this.para.login("nico", "1234");
+        this.para.create("doc 1", "contenido 1");
+        this.para.create("doc 2", "contenido 2");
+        this.para.create("doc 3", "contenido 3");
+        this.para.create("doc 4", "contenido 4");
+        this.para.logOut();
+        
         this.para.register("ale", "1234");
         this.para.register("loki", "4321");
-        this.para.register("cody", "12345");
+        this.para.register("cody", "1234");
+        this.para.register("tom", "mot");
         
     }
     
@@ -191,7 +208,7 @@ public class Menu {
                 System.out.println("con que permiso va a compartir el documento?: ");
                 System.out.println("1. \"R\" solo permite leer el documento.");
                 System.out.println("2. \"C\" Permiso \"R\" + permite comentar el documento.");
-                System.out.println("3. \"R\" Permiso \"W\" + permite escribir el documento.");
+                System.out.println("3. \"W\" Permiso \"C\" + permite escribir el documento.");
                 opcion = this.input.nextLine();
                 if (opcion.equals("1"))
                     tipo = 'R';
@@ -292,5 +309,24 @@ public class Menu {
            } else{
                System.out.println("Ha ocurrido algun error, intentelo de nuevo");
            }
+    }
+    
+    
+    public void search(){
+       String textoS;
+       LinkedList<Documento> docs;
+       System.out.println("HA ELEGIDO BUSCAR DOCUMENTOS");
+       System.out.println("introduzca un texto para buscar en los documentos que esta relacionado: ");
+       textoS = this.input.nextLine();
+       docs = this.para.search(textoS);
+       if(docs.size() == 0){
+           System.out.println("no hay documentos que contengan ese texto");
+       } else{
+           System.out.println("a continuacion se mostraran los documentos que coiciden con el criterio de busqueda: ");
+           for(Documento doc: docs){
+               System.out.println("-------------------------");
+               doc.info();
+           }
+       }
     }
 }

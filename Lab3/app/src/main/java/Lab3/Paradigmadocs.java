@@ -10,7 +10,8 @@ import java.util.LinkedList;
  */
 
 /**
- *
+ * clase que representa una plataforma
+ *  que contiene un nombre, fecha de creacion, lista de usuarios y un usuario activo
  * @author nicov
  */
 public class Paradigmadocs {

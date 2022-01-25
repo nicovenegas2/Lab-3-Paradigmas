@@ -10,7 +10,8 @@ import java.util.LinkedList;
  */
 
 /**
- *
+ * Clase que representa un documento
+ *  Contiene los documentos totales creados, un id unico, nombre, autor, contenido, fecha de creacion, fecha de modificacion, lista de versiones, lista de accesos
  * @author nicov
  */
 public class Documento {
